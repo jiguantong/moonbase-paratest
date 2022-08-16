@@ -1,0 +1,9 @@
+data
+logs/*.log
+genesis/para-*
+.idea
+logs/para/*.log
+logs/relay/*.log
+bin/acala
+bin/darwinia-collator
+bin/polkadot
