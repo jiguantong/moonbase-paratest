@@ -4,6 +4,10 @@ genesis/para-*
 .idea
 logs/para/*.log
 logs/relay/*.log
-bin/acala
-bin/darwinia-collator
+bin/moonbeam
+bin/darwinia-parachain
 bin/polkadot
+genesis/moonbase-genesis
+genesis/moonbase-wasm
+genesis/pangolin-parachain-genesis
+genesis/pangolin-parachain-wasm

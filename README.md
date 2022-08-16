@@ -1,13 +1,14 @@
 ### install killall
 `apt install psmisc`
 
-### $PARA_TEST
+### init $PARA_TEST
 ```shell
 # vim /etc/profile.d/paratest.sh
 export PARA_TEST=/yourpath
+sh script/init.sh
 ```
 
-### run
+### command
 ```shell
 script/start.sh: start relay & para
 script/stop.sh: stop relay & para
