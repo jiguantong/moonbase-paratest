@@ -1,1 +1,1 @@
-wget https://github.com/04637/paratest/releases/download/v0.1.0/bin.tar.gz
+wget https://github.com/jiguantong/moonbase-paratest/releases/download/v0.1.0/paratest-bundle.tar.gz
