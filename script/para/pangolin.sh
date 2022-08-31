@@ -8,6 +8,7 @@ nohup $PARA_TEST/bin/darwinia-parachain \
  --unsafe-ws-external --unsafe-rpc-external \
  --rpc-cors=all \
  --port 40334 \
+ --rpc-port 8889 \
  --ws-port 8845 \
  -- \
  --execution wasm \
