@@ -8,6 +8,7 @@ nohup $PARA_TEST/bin/moonbeam \
  --unsafe-ws-external --unsafe-rpc-external \
  --rpc-cors=all \
  --port 40333 \
+ --rpc-port 8888 \
  --ws-port 8844 \
  -- \
  --execution wasm \
