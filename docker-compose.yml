@@ -1,0 +1,146 @@
+version: '3'
+services:
+  dev-pangolin:
+    container_name: dev-pangolin
+    image: ubuntu:20.04
+    restart: always
+    ports:
+      - 1234:9933
+      - 1245:9944
+    volumes:
+      - /mnt/data/guantong/pangolin-dev:/usr/local/chain
+      - /mnt/data/guantong/chain-data/pangolin-dev:/data
+    command:
+      - /usr/local/chain/drml
+      - --chain=pangolin-dev
+      - --base-path=/data
+      - --unsafe-rpc-external
+      - --unsafe-ws-external
+      - --rpc-methods=unsafe
+      - --rpc-cors=all
+      - --alice
+      - --pruning=archive
+    environment:
+      - RUST_LOG=darwinia_ethereum=trace,runtime::bridge-dispatch=trace,runtime::bridge-messages=trace
+  dev-pangolin-parachain:
+    container_name: dev-pangolin-parachain
+    image: debian:stable-slim
+    restart: always
+    ports:
+      - 2234:9933
+      - 2245:9944
+    volumes:
+      - /mnt/data/guantong/moonbase-paratest/bin:/usr/local/chain
+      - /mnt/data/guantong/chain-data/pangolin-parachain:/data
+      - /mnt/data/guantong/moonbase-paratest/res:/usr/local/res
+    command:
+      - /usr/local/chain/darwinia-parachain
+      - --chain=pangolin-parachain-dev
+      - --base-path=/data
+      - --log=xcm=trace
+      - --log=runtime=trace
+      - --alice
+      - --collator
+      - --force-authoring
+      - --unsafe-ws-external
+      - --unsafe-rpc-external
+      - --rpc-cors=all
+      - --pruning=archive
+      - --
+      - --execution=wasm
+      - --chain=/usr/local/res/rococo-dev-raw.json 
+    environment:
+      - RUST_LOG=darwinia_ethereum=trace,runtime::bridge-dispatch=trace,runtime::bridge-messages=trace
+  dev-moonbase-parachain:
+    container_name: dev-moonbase-parachain
+    image: ubuntu:20.04
+    restart: always
+    ports:
+      - 3234:9933
+      - 3245:9944
+    volumes:
+      - /mnt/data/guantong/moonbase-paratest/bin:/usr/local/chain
+      - /mnt/data/guantong/chain-data/moonbase:/data
+      - /mnt/data/guantong/moonbase-paratest/res:/usr/local/res
+    command:
+      - /usr/local/chain/moonbeam
+      - --chain=moonbase-local
+      - --base-path=/data
+      - --log=xcm=trace
+      - --alice
+      - --collator
+      - --force-authoring
+      - --unsafe-ws-external
+      - --unsafe-rpc-external
+      - --rpc-cors=all
+      - --pruning=archive
+      - --
+      - --execution=wasm
+      - --chain=/usr/local/res/rococo-dev-raw.json
+  dev-rococo-relay-alice:
+    container_name: dev-rococo-relay-alice
+    image: ubuntu:20.04
+    restart: always
+    ports:
+      - 4234:9933
+      - 4245:9944
+    volumes:
+      - /mnt/data/guantong/moonbase-paratest/bin:/usr/local/chain
+      - /mnt/data/guantong/chain-data/rococo-alice:/data
+      - /mnt/data/guantong/moonbase-paratest/res:/usr/local/res
+    command:
+      - /usr/local/chain/polkadot
+      - --base-path=/data
+      - --log=xcm=trace
+      - --alice
+      - --validator
+      - --unsafe-ws-external
+      - --unsafe-rpc-external
+      - --rpc-cors=all
+      - --pruning=archive
+      - --chain=/usr/local/res/rococo-dev-raw.json
+  dev-rococo-relay-bob:
+    container_name: dev-rococo-relay-bob
+    image: ubuntu:20.04
+    restart: always
+    ports:
+      - 5234:9933
+      - 5245:9944
+    volumes:
+      - /mnt/data/guantong/moonbase-paratest/bin:/usr/local/chain
+      - /mnt/data/guantong/chain-data/rococo-bob:/data
+      - /mnt/data/guantong/moonbase-paratest/res:/usr/local/res
+    command:
+      - /usr/local/chain/polkadot
+      - --base-path=/data
+      - --log=xcm=trace
+      - --bob
+      - --validator
+      - --unsafe-ws-external
+      - --unsafe-rpc-external
+      - --rpc-cors=all
+      - --pruning=archive
+      - --chain=/usr/local/res/rococo-dev-raw.json
+  dev-rococo-relay-charlie:
+    container_name: dev-rococo-relay-charlie
+    image: ubuntu:20.04
+    restart: always
+    ports:
+      - 6234:9933
+      - 6245:9944
+    volumes:
+      - /mnt/data/guantong/moonbase-paratest/bin:/usr/local/chain
+      - /mnt/data/guantong/chain-data/rococo-charlie:/data
+      - /mnt/data/guantong/moonbase-paratest/res:/usr/local/res
+    command:
+      - /usr/local/chain/polkadot
+      - --base-path=/data
+      - --log=xcm=trace
+      - --charlie
+      - --validator
+      - --unsafe-ws-external
+      - --unsafe-rpc-external
+      - --rpc-cors=all
+      - --pruning=archive
+      - --chain=/usr/local/res/rococo-dev-raw.json
+
